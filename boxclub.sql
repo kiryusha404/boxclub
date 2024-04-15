@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 22 2024 г., 14:35
+-- Время создания: Апр 15 2024 г., 16:22
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` int NOT NULL,
-  `news_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `text` text COLLATE utf8mb4_general_ci,
+  `news_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,7 +44,29 @@ INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`) VALUES
 (2, 1, 2, 'Жду соревнования', '2024-03-31 12:57:22'),
 (3, 2, 2, 'Я очень долго готовился', '2024-03-14 12:57:22'),
 (5, 1, 2, 'было супер', '2024-03-21 14:38:22'),
-(6, 2, 2, 'Работа 25/7', '2024-03-21 14:44:06');
+(6, 2, 2, 'Работа 25/7', '2024-03-21 14:44:06'),
+(7, 2, 2, 'Круто', '2024-03-22 16:19:45'),
+(8, 1, 2, 'фы', '2024-04-15 13:06:37');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `text` text COLLATE utf8mb4_general_ci NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `user_id`, `text`, `date`) VALUES
+(2, 2, 'Отличный клуб', '2024-04-15 16:51:37');
 
 -- --------------------------------------------------------
 
@@ -108,6 +130,13 @@ ALTER TABLE `comments`
   ADD KEY `comments_ibfk_2` (`user_id`);
 
 --
+-- Индексы таблицы `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
@@ -127,7 +156,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -151,6 +186,12 @@ ALTER TABLE `users`
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
