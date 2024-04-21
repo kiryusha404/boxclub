@@ -43,7 +43,7 @@
                             <a class="nav-link" href="">{{ __('Наша гордость') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('О нас') }}</a>
+                            <a class="nav-link" href="{{ route('about') }}">{{ __('О нас') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('feedback') }}">{{ __('Отзывы') }}</a>

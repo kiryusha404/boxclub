@@ -24,6 +24,9 @@ Route::get('/new/{id}', [App\Http\Controllers\MainController::class, 'new'])->na
 // добавление коментария
 Route::post('/add_comment', [App\Http\Controllers\MainController::class, 'add_comment'])->name('add_comment')->middleware('auth');
 
+//страница о нас
+Route::get('/about', [App\Http\Controllers\MainController::class, 'about'])->name('about');
+
 // страница отзывы
 Route::get('/feedback', [App\Http\Controllers\MainController::class, 'feedback'])->name('feedback');
 // удаление отзыва

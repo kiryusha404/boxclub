@@ -43,6 +43,11 @@ class MainController extends Controller
         return redirect()->back();
     }
 
+    //страница о нас
+    public function about(){
+        return view('about');
+    }
+
 
     //страница отзывов
     public function feedback(){

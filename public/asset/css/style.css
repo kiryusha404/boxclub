@@ -56,3 +56,9 @@
 .b_feedback{
     width: 100%;
 }
+/*страница он нас */
+.about{
+    width: 98%;
+    margin: 0 auto;
+}
+
