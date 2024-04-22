@@ -2,18 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
 // лицензионное соглашение
 Route::get('/license', [App\Http\Controllers\MainController::class, 'license'])->name('license');
 
@@ -42,6 +30,12 @@ Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'feedba
 Route::post('/del_feedback', [App\Http\Controllers\FeedbackController::class, 'del_feedback'])->name('del_feedback')->middleware('auth');
 // добавление отзыва
 Route::post('/add_feedback', [App\Http\Controllers\FeedbackController::class, 'add_feedback'])->name('add_feedback')->middleware('auth');
+
+//страница тренеры
+Route::get('/coach', [App\Http\Controllers\CoachController::class, 'coach'])->name('coach');
+
+//страница наша гордость
+Route::get('/boxer', [App\Http\Controllers\BoxerController::class, 'boxer'])->name('boxer');
 
 //авторизация
 Auth::routes();

@@ -37,10 +37,10 @@
                             <a class="nav-link" href="{{route('schedule')}}">{{ __('Расписание') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Тренеры') }}</a>
+                            <a class="nav-link" href="{{route('coach')}}">{{ __('Тренеры') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Наша гордость') }}</a>
+                            <a class="nav-link" href="{{route('boxer')}}">{{ __('Наша гордость') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('about') }}">{{ __('О нас') }}</a>
