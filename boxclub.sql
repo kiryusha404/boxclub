@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 22 2024 г., 15:32
+-- Время создания: Апр 22 2024 г., 17:03
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -40,6 +40,48 @@ CREATE TABLE `application` (
 
 INSERT INTO `application` (`id`, `user_id`, `date`, `status`) VALUES
 (4, 4, '2024-04-22 16:21:59', 'expectation');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `boxer`
+--
+
+CREATE TABLE `boxer` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `text` text COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `boxer`
+--
+
+INSERT INTO `boxer` (`id`, `user_id`, `img`, `text`) VALUES
+(1, 2, '1.png', '1 взрослый разряд по боксу. Победитель турниров категории \"б\".'),
+(2, 5, '2.png', 'Мастер спорта России по боксу. Победитель турниров категории \"а\". ');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `coach`
+--
+
+CREATE TABLE `coach` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `text` text COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `coach`
+--
+
+INSERT INTO `coach` (`id`, `user_id`, `img`, `text`) VALUES
+(1, 3, '1.png', 'Заслуженный тренер России. Стаж преподавания 20 лет.'),
+(2, 4, '2.png', 'Мастер спорта по боксу. Стаж преподавания 2 года.');
 
 -- --------------------------------------------------------
 
@@ -161,7 +203,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `surname`, `name`, `patronymic`, `tel`, `email`, `password`, `role_id`, `updated_at`, `created_at`) VALUES
 (2, 'Климов', 'Кирилл', 'Константинович', '+79501788149', 'akvamarin0610@gmail.com', '$2y$12$28HWcNDB5PGiQ6Gu0QIhfObjZFxKM9ZLS0MTK2LGXKlqtTVRk7Efa', 1, '2024-03-03 14:04:15', '2024-03-03 14:04:15'),
 (3, 'Генадьев', 'Вячеслав', 'Игоревич', '+79008007060', 'vyach@mail.com', '$2y$12$YH.dbqMpvXriy/taGWx1IOgxtO5kJq3b11YXbMuOfonXsUBsb/fUe', 1, '2024-04-22 06:39:56', '2024-04-22 06:39:56'),
-(4, 'Гондырев', 'Николай', 'Владимирович', '+79908807744', 'nikola@gmail.com', '$2y$12$tjO/g/FmT2uj0woSI4sBJuLfE0fXp0TodB.f07xPR0PKSbQDMxlre', 1, '2024-04-22 06:52:38', '2024-04-22 06:52:38');
+(4, 'Гондырев', 'Николай', 'Владимирович', '+79908807744', 'nikola@gmail.com', '$2y$12$tjO/g/FmT2uj0woSI4sBJuLfE0fXp0TodB.f07xPR0PKSbQDMxlre', 1, '2024-04-22 06:52:38', '2024-04-22 06:52:38'),
+(5, 'Карамов', 'Артур', 'Иванович', '+78889996767', 'artur@gmail.com', '$2y$12$HTnNbCIkTxZCJ69cnzZ.iOK306baFL6haijSH63B2EFqmIDePfeAm', 1, '2024-04-22 13:54:30', '2024-04-22 13:54:30');
 
 -- --------------------------------------------------------
 
@@ -203,6 +246,20 @@ ALTER TABLE `application`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
   ADD UNIQUE KEY `user_id_2` (`user_id`);
+
+--
+-- Индексы таблицы `boxer`
+--
+ALTER TABLE `boxer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `boxer_ibfk_1` (`user_id`);
+
+--
+-- Индексы таблицы `coach`
+--
+ALTER TABLE `coach`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `comments`
@@ -256,6 +313,18 @@ ALTER TABLE `application`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `boxer`
+--
+ALTER TABLE `boxer`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `coach`
+--
+ALTER TABLE `coach`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
@@ -283,7 +352,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `weekday`
@@ -300,6 +369,18 @@ ALTER TABLE `weekday`
 --
 ALTER TABLE `application`
   ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `boxer`
+--
+ALTER TABLE `boxer`
+  ADD CONSTRAINT `boxer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `coach`
+--
+ALTER TABLE `coach`
+  ADD CONSTRAINT `coach_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `comments`
