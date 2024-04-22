@@ -24,6 +24,9 @@ Route::get('/new/{id}', [App\Http\Controllers\MainController::class, 'new'])->na
 // добавление коментария
 Route::post('/add_comment', [App\Http\Controllers\MainController::class, 'add_comment'])->name('add_comment')->middleware('auth');
 
+//страница расписание
+Route::get('/schedule', [App\Http\Controllers\MainController::class, 'schedule'])->name('schedule');
+
 //страница о нас
 Route::get('/about', [App\Http\Controllers\MainController::class, 'about'])->name('about');
 

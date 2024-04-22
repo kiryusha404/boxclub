@@ -43,6 +43,21 @@ class MainController extends Controller
         return redirect()->back();
     }
 
+    //страница расписание
+    public function schedule(){
+        $coach = DB::table('schedule')->select('schedule.user_id', 'users.name', 'users.surname', 'users.patronymic')->join('users', 'users.id', '=', 'schedule.user_id')->groupBy('user_id')->get();
+        foreach ($coach as $schedule){
+            $schedule->position = $this->schedule_position($schedule->user_id);
+        }
+        dd($coach);
+        return view('schedule');
+    }
+    //функция возращающая позиции в расписании
+    private function schedule_position($id){
+        $position = DB::table('schedule')->join('weekday', 'weekday.id', '=', 'schedule.weekday_id')->get();
+        return $position;
+    }
+
     //страница о нас
     public function about(){
         return view('about');
