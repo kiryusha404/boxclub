@@ -37,6 +37,16 @@ Route::get('/coach', [App\Http\Controllers\CoachController::class, 'coach'])->na
 //страница наша гордость
 Route::get('/boxer', [App\Http\Controllers\BoxerController::class, 'boxer'])->name('boxer');
 
+//админ панель
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+//добавление модератора
+Route::post('/add_moder', [App\Http\Controllers\AdminController::class, 'add_moder'])->name('add_moder');
+//удаление модератора
+Route::post('/del_moder', [App\Http\Controllers\AdminController::class, 'del_moder'])->name('del_moder');
+
+//обзор заявок
+Route::get('/application', [App\Http\Controllers\ModerController::class, 'application'])->name('application');
+
 //авторизация
 Auth::routes();
 
