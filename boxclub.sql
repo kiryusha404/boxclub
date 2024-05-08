@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 22 2024 г., 17:03
+-- Время создания: Май 08 2024 г., 22:45
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -39,7 +39,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `user_id`, `date`, `status`) VALUES
-(4, 4, '2024-04-22 16:21:59', 'expectation');
+(4, 4, '2024-04-22 16:21:59', 'expectation'),
+(6, 2, '2024-04-29 14:33:10', 'expectation');
 
 -- --------------------------------------------------------
 
@@ -156,6 +157,26 @@ INSERT INTO `news` (`id`, `img`, `name`, `text`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `role`
+--
+
+CREATE TABLE `role` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `role`
+--
+
+INSERT INTO `role` (`id`, `name`) VALUES
+(1, 'user'),
+(2, 'moder'),
+(3, 'admin');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `schedule`
 --
 
@@ -201,9 +222,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `surname`, `name`, `patronymic`, `tel`, `email`, `password`, `role_id`, `updated_at`, `created_at`) VALUES
-(2, 'Климов', 'Кирилл', 'Константинович', '+79501788149', 'akvamarin0610@gmail.com', '$2y$12$28HWcNDB5PGiQ6Gu0QIhfObjZFxKM9ZLS0MTK2LGXKlqtTVRk7Efa', 1, '2024-03-03 14:04:15', '2024-03-03 14:04:15'),
-(3, 'Генадьев', 'Вячеслав', 'Игоревич', '+79008007060', 'vyach@mail.com', '$2y$12$YH.dbqMpvXriy/taGWx1IOgxtO5kJq3b11YXbMuOfonXsUBsb/fUe', 1, '2024-04-22 06:39:56', '2024-04-22 06:39:56'),
-(4, 'Гондырев', 'Николай', 'Владимирович', '+79908807744', 'nikola@gmail.com', '$2y$12$tjO/g/FmT2uj0woSI4sBJuLfE0fXp0TodB.f07xPR0PKSbQDMxlre', 1, '2024-04-22 06:52:38', '2024-04-22 06:52:38'),
+(2, 'Климов', 'Кирилл', 'Константинович', '+79501788149', 'akvamarin0610@gmail.com', '$2y$12$28HWcNDB5PGiQ6Gu0QIhfObjZFxKM9ZLS0MTK2LGXKlqtTVRk7Efa', 3, '2024-03-03 14:04:15', '2024-03-03 14:04:15'),
+(3, 'Генадьев', 'Вячеслав', 'Игоревич', '+79008007060', 'vyach@mail.com', '$2y$12$YH.dbqMpvXriy/taGWx1IOgxtO5kJq3b11YXbMuOfonXsUBsb/fUe', 2, '2024-04-22 06:39:56', '2024-04-22 06:39:56'),
+(4, 'Гондырев', 'Николай', 'Владимирович', '+79908807744', 'nikola@gmail.com', '$2y$12$tjO/g/FmT2uj0woSI4sBJuLfE0fXp0TodB.f07xPR0PKSbQDMxlre', 2, '2024-04-22 06:52:38', '2024-04-22 06:52:38'),
 (5, 'Карамов', 'Артур', 'Иванович', '+78889996767', 'artur@gmail.com', '$2y$12$HTnNbCIkTxZCJ69cnzZ.iOK306baFL6haijSH63B2EFqmIDePfeAm', 1, '2024-04-22 13:54:30', '2024-04-22 13:54:30');
 
 -- --------------------------------------------------------
@@ -245,7 +266,8 @@ INSERT INTO `weekday` (`id`, `weekday`) VALUES
 ALTER TABLE `application`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD UNIQUE KEY `user_id_2` (`user_id`);
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
+  ADD UNIQUE KEY `user_id_3` (`user_id`);
 
 --
 -- Индексы таблицы `boxer`
@@ -283,6 +305,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `schedule`
 --
 ALTER TABLE `schedule`
@@ -294,7 +322,8 @@ ALTER TABLE `schedule`
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Индексы таблицы `weekday`
@@ -310,7 +339,7 @@ ALTER TABLE `weekday`
 -- AUTO_INCREMENT для таблицы `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `boxer`
@@ -341,6 +370,12 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `news`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `schedule`
@@ -401,6 +436,12 @@ ALTER TABLE `feedback`
 ALTER TABLE `schedule`
   ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`weekday_id`) REFERENCES `weekday` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
