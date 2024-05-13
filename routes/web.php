@@ -46,6 +46,8 @@ Route::post('/del_moder', [App\Http\Controllers\AdminController::class, 'del_mod
 
 //обзор заявок
 Route::get('/application', [App\Http\Controllers\ModerController::class, 'application'])->name('application');
+//добавление новости
+Route::post('/add_news', [App\Http\Controllers\ModerController::class, 'add_news'])->name('add_news');
 
 //авторизация
 Auth::routes();

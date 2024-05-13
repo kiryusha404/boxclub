@@ -8,7 +8,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/asset/images/boxer/{{$boxer->img}}" class="img-fluid rounded-start" alt="boxer">
+                        <img src="{{Storage::url($boxer->img)}}" class="img-fluid rounded-start" alt="boxer">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
