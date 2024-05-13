@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 08 2024 г., 22:45
+-- Время создания: Май 13 2024 г., 21:07
 -- Версия сервера: 8.0.19
 -- Версия PHP: 8.0.1
 
@@ -60,8 +60,9 @@ CREATE TABLE `boxer` (
 --
 
 INSERT INTO `boxer` (`id`, `user_id`, `img`, `text`) VALUES
-(1, 2, '1.png', '1 взрослый разряд по боксу. Победитель турниров категории \"б\".'),
-(2, 5, '2.png', 'Мастер спорта России по боксу. Победитель турниров категории \"а\". ');
+(1, 2, 'images/boxer/1.png', '1 взрослый разряд по боксу. Победитель турниров категории \"б\".'),
+(2, 5, 'images/boxer/2.png', 'Мастер спорта России по боксу. Победитель турниров категории \"а\". '),
+(3, 6, 'images/boxer/R4t8fn0BF5Kw9ueSoe1COsxq5hgNCQ4QCieLNZqt.jpg', 'Регулярный участник соревнований, занял первое место среди начинающих спортсменов на республиканском уровне');
 
 -- --------------------------------------------------------
 
@@ -81,8 +82,9 @@ CREATE TABLE `coach` (
 --
 
 INSERT INTO `coach` (`id`, `user_id`, `img`, `text`) VALUES
-(1, 3, '1.png', 'Заслуженный тренер России. Стаж преподавания 20 лет.'),
-(2, 4, '2.png', 'Мастер спорта по боксу. Стаж преподавания 2 года.');
+(1, 3, 'images/coach/1.png', 'Заслуженный тренер России. Стаж преподавания 20 лет.'),
+(2, 4, 'images/coach/2.png', 'Мастер спорта по боксу. Стаж преподавания 2 года.'),
+(3, 7, 'images/coach/ouVpq9agOppXezfSdT6h37xRFPNFAvTRgeacU6e6.jpg', 'Заслуженный тренер Удмуртской республики. Стаж преподавания 10 лет.');
 
 -- --------------------------------------------------------
 
@@ -143,7 +145,7 @@ CREATE TABLE `news` (
   `img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `text` text COLLATE utf8mb4_general_ci,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -151,8 +153,9 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `img`, `name`, `text`, `date`) VALUES
-(1, '1.jpg', 'Прошли соревнования', 'Прошли соревнования, наши спортсмены заняли призовые места', '2024-03-01 19:13:44'),
-(2, '2.jpg', 'Готовимся к очень важным соревнованиям', 'Наши спортсмены готовятся к получению мастера спорта', '2024-02-27 19:13:44');
+(1, 'images/news/1.jpg', 'Прошли соревнования', 'Прошли соревнования, наши спортсмены заняли призовые места', '2024-03-01 19:13:44'),
+(2, 'images/news/2.jpg', 'Готовимся к очень важным соревнованиям', 'Наши спортсмены готовятся к получению мастера спорта', '2024-02-27 19:13:44'),
+(3, 'images/news/SfAkgWkvRso85KhHJUd7hIcvA5Q4rQdMUmI0Ai8f.jpg', 'Открывается женская группа', 'Скоро будет возможность записаться в женскую группу', '2024-05-13 15:05:27');
 
 -- --------------------------------------------------------
 
@@ -225,7 +228,9 @@ INSERT INTO `users` (`id`, `surname`, `name`, `patronymic`, `tel`, `email`, `pas
 (2, 'Климов', 'Кирилл', 'Константинович', '+79501788149', 'akvamarin0610@gmail.com', '$2y$12$28HWcNDB5PGiQ6Gu0QIhfObjZFxKM9ZLS0MTK2LGXKlqtTVRk7Efa', 3, '2024-03-03 14:04:15', '2024-03-03 14:04:15'),
 (3, 'Генадьев', 'Вячеслав', 'Игоревич', '+79008007060', 'vyach@mail.com', '$2y$12$YH.dbqMpvXriy/taGWx1IOgxtO5kJq3b11YXbMuOfonXsUBsb/fUe', 2, '2024-04-22 06:39:56', '2024-04-22 06:39:56'),
 (4, 'Гондырев', 'Николай', 'Владимирович', '+79908807744', 'nikola@gmail.com', '$2y$12$tjO/g/FmT2uj0woSI4sBJuLfE0fXp0TodB.f07xPR0PKSbQDMxlre', 2, '2024-04-22 06:52:38', '2024-04-22 06:52:38'),
-(5, 'Карамов', 'Артур', 'Иванович', '+78889996767', 'artur@gmail.com', '$2y$12$HTnNbCIkTxZCJ69cnzZ.iOK306baFL6haijSH63B2EFqmIDePfeAm', 1, '2024-04-22 13:54:30', '2024-04-22 13:54:30');
+(5, 'Карамов', 'Артур', 'Иванович', '+78889996767', 'artur@gmail.com', '$2y$12$HTnNbCIkTxZCJ69cnzZ.iOK306baFL6haijSH63B2EFqmIDePfeAm', 1, '2024-04-22 13:54:30', '2024-04-22 13:54:30'),
+(6, 'Низамцев', 'Игорь', 'Валерьевич', '98882223344', 'var@dsfsd.com', '$2y$12$C9xZ6h7tSzgELTtwp8Dv1O6rwUEhW6eohgpQzepcI50kuK9KSqfe2', 1, '2024-05-13 16:45:06', '2024-05-13 16:45:06'),
+(7, 'Селезнев', 'Степан', 'Владимирович', '78884443325', 'jsvifdhvb@bdbb.ru', '$2y$12$/RSBOjqFli/0qOUDtskQmOCeNS2irsBKDXCixCdmwSOSrnkx8Dj0e', 2, '2024-05-13 17:32:11', '2024-05-13 17:32:11');
 
 -- --------------------------------------------------------
 
@@ -345,13 +350,13 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT для таблицы `boxer`
 --
 ALTER TABLE `boxer`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `coach`
 --
 ALTER TABLE `coach`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
@@ -369,7 +374,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `role`
@@ -387,7 +392,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `weekday`
