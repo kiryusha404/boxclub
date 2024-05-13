@@ -19,7 +19,7 @@
 
                                     <div class="col-md-6">
                                         <select class="form-select" aria-label="Disabled select example" name="moder">
-                                            <option selected disabled>Выберете</option>
+                                            <option selected disabled>Выберите</option>
                                             @foreach($users as $user)
                                             <option value="{{$user->id}}">{{$user->surname}} {{$user->name}} {{$user->patronymic}} - {{$user->email}}</option>
                                             @endforeach
@@ -57,7 +57,7 @@
 
                                     <div class="col-md-6">
                                         <select class="form-select" aria-label="Disabled select example" name="moder">
-                                            <option selected disabled>Выберете</option>
+                                            <option selected disabled>Выберите</option>
                                             @foreach($moders as $moder)
                                                 <option value="{{$moder->id}}">{{$moder->surname}} {{$moder->name}} {{$moder->patronymic}} - {{$moder->email}}</option>
                                             @endforeach

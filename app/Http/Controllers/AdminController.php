@@ -40,4 +40,15 @@ class AdminController extends Controller
         }
         return redirect(route('admin'));
     }
+
+    // добавление тренера
+    public function add_coach(Request $coach){
+        if(Auth()->User() && Auth()->User()->role_id == 3){
+            if(isset($coach->id)){
+                $img = $coach->file('image')->store('/images/coach', 'public');
+                DB::table('coach')->insert(['user_id' => $coach->id, 'text' => $coach->body, 'img' => $img]);
+            }
+        }
+        return redirect(route('coach'));
+    }
 }

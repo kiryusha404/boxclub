@@ -4,7 +4,7 @@
 
     @foreach($news as $new)
         <div class="card block_news" style="width: 90%;">
-            <img class="card-img-top" src="/asset/images/news/{{ $new->img }}" alt="Card image cap">
+            <img class="card-img-top" src="{{Storage::url($new->img) }}" alt="Card image cap">
             <div class="card-body pb-0">
                 <h5 class="card-title">{{ $new->name }}</h5>
                 <p class="card-text">{{ $new->text }}</p>

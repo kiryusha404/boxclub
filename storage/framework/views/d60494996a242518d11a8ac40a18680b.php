@@ -2,6 +2,47 @@
     <div class="coach">
         <h1 class="name_page">Наша гордость</h1>
 
+        <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
+            <div class=" block_news" style="width: 100%;">
+                <div class="row justify-content-center">
+                    <div class="" >
+                        <div class="card">
+                            <div class="card-header"><?php echo e(__('Добавить карточку боксёра')); ?></div>
+
+                            <div class="card-body">
+
+                                <form method="POST" action="<?php echo e(route('add_boxer')); ?>" enctype="multipart/form-data">
+                                    <?php echo e(csrf_field()); ?>
+
+                                    <?php echo csrf_field(); ?>
+                                    <div class="form-group">
+                                        <label for="name">Имя спортмена</label>
+                                        <select class="form-select" aria-label="Disabled select example" name="id">
+                                            <option selected disabled>Выберите</option>
+                                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($user->id); ?>"><?php echo e($user->surname); ?> <?php echo e($user->name); ?> <?php echo e($user->patronymic); ?> - <?php echo e($user->email); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="body">Описание спортмена</label>
+                                        <textarea class="form-control" id="body" rows="3" name="body" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image" style="width: 100%;">Фотография спортсмена</label>
+                                        <input type="file" class="form-control-file" id="image" name="image" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Опубликовать</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <?php $__currentLoopData = $boxers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $boxer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">

@@ -2,7 +2,7 @@
 
     <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $new): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="card block_news" style="width: 90%;">
-            <img class="card-img-top" src="/asset/images/news/<?php echo e($new->img); ?>" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo e(Storage::url($new->img)); ?>" alt="Card image cap">
             <div class="card-body pb-0">
                 <h5 class="card-title"><?php echo e($new->name); ?></h5>
                 <p class="card-text"><?php echo e($new->text); ?></p>

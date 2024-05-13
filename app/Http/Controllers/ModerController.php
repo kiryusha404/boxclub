@@ -15,6 +15,7 @@ class ModerController extends Controller
         }
         return redirect(url('/'));
     }
+
     //добавление новости
     public function add_news(Request $news){
         if(Auth()->User() && Auth()->User()->role_id > 1){
@@ -22,5 +23,16 @@ class ModerController extends Controller
             DB::table('news')->insert(['name' => $news->name, 'text' => $news->body, 'img' => $img]);
         }
         return redirect(url('/'));
+    }
+
+    //создание карточки боксёра
+    public function add_boxer(Request $boxer){
+        if(Auth()->User() && Auth()->User()->role_id > 1){
+            if(isset($boxer->id)){
+                $img = $boxer->file('image')->store('/images/boxer', 'public');
+                DB::table('boxer')->insert(['user_id' => $boxer->id, 'text' => $boxer->body, 'img' => $img]);
+            }
+        }
+        return redirect(route('boxer'));
     }
 }
