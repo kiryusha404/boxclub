@@ -45,7 +45,18 @@
             <p class="card-text"><?php echo e($new->text); ?></p>
             <p class="card-text date_news"><?php echo e(date('H:i d.m.y', strtotime($new->date))); ?></p>
         </div>
+        <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
 
+            <div class="news_comment" style="margin-bottom: 15px;">
+                <form action="<?php echo e(route('del_news')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" name="new_id" value="<?php echo e($new->id); ?>">
+                    <div class="input-group text-danger">
+                        <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить новость</button>
+                    </div>
+                </form>
+            </div>
+        <?php endif; ?>
         <?php if(count($new->comments) > 0): ?>
             <div class="news_comment">
             <?php $__currentLoopData = $new->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -57,13 +68,16 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         <?php endif; ?>
+
         <a href="<?php echo e(route('new', $new->id)); ?>" class="news_other">
         <div class="news_comment">
             <p>Подробнее ></p>
         </div>
         </a>
+
     </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 
 
 </div>

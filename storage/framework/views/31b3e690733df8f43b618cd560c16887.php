@@ -8,8 +8,20 @@
                 <p class="card-text"><?php echo e($new->text); ?></p>
                 <p class="card-text date_news"><?php echo e(date('H:i d.m.y', strtotime($new->date))); ?></p>
             </div>
+            <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
+
+                <div class="news_comment" style="margin-bottom: 15px;">
+                    <form action="<?php echo e(route('del_news')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="new_id" value="<?php echo e($new->id); ?>">
+                        <div class="input-group text-danger">
+                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить новость</button>
+                        </div>
+                    </form>
+                </div>
+            <?php endif; ?>
             <?php if(auth()->check()): ?>
-            <div class="comment_feedback">
+            <div class="comment_feedback" >
                 <form action="<?php echo e(route('add_comment')); ?>" method="post">
                     <?php echo csrf_field(); ?>
                     <div class="input-group">

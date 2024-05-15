@@ -37,6 +37,7 @@ Route::get('/coach', [App\Http\Controllers\CoachController::class, 'coach'])->na
 //страница наша гордость
 Route::get('/boxer', [App\Http\Controllers\BoxerController::class, 'boxer'])->name('boxer');
 
+//возможности администратора
 //админ панель
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
 //добавление модератора
@@ -45,14 +46,20 @@ Route::post('/add_moder', [App\Http\Controllers\AdminController::class, 'add_mod
 Route::post('/del_moder', [App\Http\Controllers\AdminController::class, 'del_moder'])->name('del_moder');
 //добавление тренера
 Route::post('/add_coach', [App\Http\Controllers\AdminController::class, 'add_coach'])->name('add_coach');
+//удаление тренера
+Route::post('/del_coach', [App\Http\Controllers\AdminController::class, 'del_coach'])->name('del_coach');
 
 //возможности модератора
 //обзор заявок
 Route::get('/application', [App\Http\Controllers\ModerController::class, 'application'])->name('application');
 //добавление новости
 Route::post('/add_news', [App\Http\Controllers\ModerController::class, 'add_news'])->name('add_news');
+//удаление новости
+Route::post('/del_news', [App\Http\Controllers\ModerController::class, 'del_news'])->name('del_news');
 //добавление спортсмена
 Route::post('/add_boxer', [App\Http\Controllers\ModerController::class, 'add_boxer'])->name('add_boxer');
+//удаление спортсмена
+Route::post('/del_boxer', [App\Http\Controllers\ModerController::class, 'del_boxer'])->name('del_boxer');
 
 //авторизация
 Auth::routes();

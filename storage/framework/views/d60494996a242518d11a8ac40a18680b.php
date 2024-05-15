@@ -5,7 +5,7 @@
         <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
             <div class=" block_news" style="width: 100%;">
                 <div class="row justify-content-center">
-                    <div class="" >
+                    <div  >
                         <div class="card">
                             <div class="card-header"><?php echo e(__('Добавить карточку боксёра')); ?></div>
 
@@ -17,7 +17,7 @@
                                     <?php echo csrf_field(); ?>
                                     <div class="form-group">
                                         <label for="name">Имя спортмена</label>
-                                        <select class="form-select" aria-label="Disabled select example" name="id">
+                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name">
                                             <option selected disabled>Выберите</option>
                                             <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($user->id); ?>"><?php echo e($user->surname); ?> <?php echo e($user->name); ?> <?php echo e($user->patronymic); ?> - <?php echo e($user->email); ?></option>
@@ -53,9 +53,22 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo e($boxer->surname); ?> <?php echo e($boxer->name); ?> <?php echo e($boxer->patronymic); ?></h5>
                             <p class="card-text"><?php echo e($boxer->text); ?></p>
+                            <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
+
+                                <div class="news_comment " style="margin-bottom: 15px; ">
+                                    <form action="<?php echo e(route('del_boxer')); ?>" method="post">
+                                        <?php echo csrf_field(); ?>
+                                        <input type="hidden" name="id" value="<?php echo e($boxer->id); ?>">
+                                        <div class="input-group text-danger">
+                                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить карточку спортмена</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
+
             </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

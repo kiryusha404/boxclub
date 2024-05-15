@@ -7,7 +7,7 @@
         @if(Auth()->User() && Auth()->User()->role_id > 1)
             <div class=" block_news" style="width: 100%;">
                 <div class="row justify-content-center">
-                    <div class="" >
+                    <div  >
                         <div class="card">
                             <div class="card-header">{{ __('Добавить карточку боксёра') }}</div>
 
@@ -18,7 +18,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Имя спортмена</label>
-                                        <select class="form-select" aria-label="Disabled select example" name="id">
+                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name">
                                             <option selected disabled>Выберите</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->surname}} {{$user->name}} {{$user->patronymic}} - {{$user->email}}</option>
@@ -54,9 +54,22 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $boxer->surname }} {{ $boxer->name }} {{ $boxer->patronymic }}</h5>
                             <p class="card-text">{{$boxer->text}}</p>
+                            @if(Auth()->User() && Auth()->User()->role_id > 1)
+
+                                <div class="news_comment " style="margin-bottom: 15px; ">
+                                    <form action="{{ route('del_boxer') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $boxer->id }}">
+                                        <div class="input-group text-danger">
+                                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить карточку спортмена</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
+
             </div>
         @endforeach
 

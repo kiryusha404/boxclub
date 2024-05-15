@@ -10,8 +10,20 @@
                 <p class="card-text">{{ $new->text }}</p>
                 <p class="card-text date_news">{{ date('H:i d.m.y', strtotime($new->date)) }}</p>
             </div>
+            @if(Auth()->User() && Auth()->User()->role_id > 1)
+
+                <div class="news_comment" style="margin-bottom: 15px;">
+                    <form action="{{ route('del_news') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="new_id" value="{{ $new->id }}">
+                        <div class="input-group text-danger">
+                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить новость</button>
+                        </div>
+                    </form>
+                </div>
+            @endif
             @if(auth()->check())
-            <div class="comment_feedback">
+            <div class="comment_feedback" >
                 <form action="{{ route('add_comment') }}" method="post">
                     @csrf
                     <div class="input-group">
