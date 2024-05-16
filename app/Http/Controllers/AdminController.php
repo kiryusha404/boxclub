@@ -54,7 +54,7 @@ class AdminController extends Controller
 
     //удаление карточки тренера
     public function del_coach(Request $coach){
-        if(Auth()->User() && Auth()->User()->role_id > 1){
+        if(Auth()->User() && Auth()->User()->role_id == 3){
             DB::table('coach')->where('user_id', '=', $coach->id)->delete();
         }
         return redirect(route('coach'));

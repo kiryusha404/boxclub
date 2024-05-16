@@ -55,7 +55,7 @@
                         <h5 class="card-title">{{ $coach->surname }} {{ $coach->name }} {{ $coach->patronymic }}</h5>
                         <p class="card-text">{{$coach->text}}</p>
 
-                    @if(Auth()->User() && Auth()->User()->role_id > 1)
+                    @if(Auth()->User() && Auth()->User()->role_id == 3)
 
                         <div class="news_comment " style="margin-bottom: 15px; ">
                             <form action="{{ route('del_coach') }}" method="post">
