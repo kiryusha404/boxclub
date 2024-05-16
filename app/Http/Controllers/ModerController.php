@@ -51,4 +51,13 @@ class ModerController extends Controller
         }
         return redirect(route('boxer'));
     }
+
+    // удаление любого комментария
+    public function del_comment_moder(Request $comment){
+        if(Auth()->User() && Auth()->User()->role_id > 1) {
+            DB::table('comments')->where('id', '=', $comment->id)->delete();
+        }
+        return redirect()->back();
+
+    }
 }

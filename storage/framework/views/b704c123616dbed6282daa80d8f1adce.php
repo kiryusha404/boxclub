@@ -54,7 +54,7 @@
                         <h5 class="card-title"><?php echo e($coach->surname); ?> <?php echo e($coach->name); ?> <?php echo e($coach->patronymic); ?></h5>
                         <p class="card-text"><?php echo e($coach->text); ?></p>
 
-                    <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
+                    <?php if(Auth()->User() && Auth()->User()->role_id == 3): ?>
 
                         <div class="news_comment " style="margin-bottom: 15px; ">
                             <form action="<?php echo e(route('del_coach')); ?>" method="post">

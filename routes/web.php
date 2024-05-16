@@ -11,6 +11,8 @@ Route::get('/', [App\Http\Controllers\NewsController::class, 'welcome'])->name('
 Route::get('/new/{id}', [App\Http\Controllers\NewsController::class, 'new'])->name('new');
 // добавление коментария
 Route::post('/add_comment', [App\Http\Controllers\NewsController::class, 'add_comment'])->name('add_comment')->middleware('auth');
+// удаление коментария
+Route::post('/del_comment', [App\Http\Controllers\NewsController::class, 'del_comment'])->name('del_comment');
 
 //страница расписание
 Route::get('/schedule', [App\Http\Controllers\ScheduleController::class, 'schedule'])->name('schedule');
@@ -60,6 +62,8 @@ Route::post('/del_news', [App\Http\Controllers\ModerController::class, 'del_news
 Route::post('/add_boxer', [App\Http\Controllers\ModerController::class, 'add_boxer'])->name('add_boxer');
 //удаление спортсмена
 Route::post('/del_boxer', [App\Http\Controllers\ModerController::class, 'del_boxer'])->name('del_boxer');
+//удаление комментария
+Route::post('/del_comment_moder', [App\Http\Controllers\ModerController::class, 'del_comment_moder'])->name('del_comment_moder');
 
 //авторизация
 Auth::routes();

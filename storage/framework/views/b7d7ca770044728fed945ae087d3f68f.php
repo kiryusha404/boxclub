@@ -47,7 +47,7 @@
         </div>
         <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
 
-            <div class="news_comment" style="margin-bottom: 15px;">
+            <div class="news_comment position-absolute top-0 end-0" style="margin-bottom: 15px; ">
                 <form action="<?php echo e(route('del_news')); ?>" method="POST">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" name="new_id" value="<?php echo e($new->id); ?>">
@@ -60,7 +60,30 @@
         <?php if(count($new->comments) > 0): ?>
             <div class="news_comment">
             <?php $__currentLoopData = $new->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="<?php echo e(!$loop->last ? 'date_comment' : ''); ?>">
+                <div class="<?php echo e(!$loop->last ? 'date_comment' : ''); ?> position-relative">
+
+                    <?php if(Auth()->User() && Auth()->User()->id == $comment->user_id): ?>
+                        <div class=" position-absolute top-0 end-0">
+                            <form action="<?php echo e(route('del_comment')); ?>" method="post">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="id" value="<?php echo e($comment->comment_id); ?>">
+                                <div class="input-group text-danger">
+                                    <button type="submit" class="btn btn-link btn-sm" data-mdb-ripple-init style="padding: 0px;">Удалить</button>
+                                </div>
+                            </form>
+                        </div>
+                    <?php elseif(Auth()->User()->role_id > 1): ?>
+                        <div class=" position-absolute top-0 end-0">
+                            <form action="<?php echo e(route('del_comment_moder')); ?>" method="post">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="id" value="<?php echo e($comment->comment_id); ?>">
+                                <div class="input-group text-danger">
+                                    <button type="submit" class="btn btn-link btn-sm" data-mdb-ripple-init style="padding: 0px;">Удалить</button>
+                                </div>
+                            </form>
+                        </div>
+                    <?php endif; ?>
+
                     <h6><?php echo e($comment->surname); ?> <?php echo e($comment->name); ?></h6>
                     <p><?php echo e($comment->text); ?></p>
                     <p class="date_news"><?php echo e(date('H:i d.m.y', strtotime($comment->date))); ?></p>
