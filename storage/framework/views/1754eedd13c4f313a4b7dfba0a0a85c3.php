@@ -2,6 +2,7 @@
 
     <div class="schedule">
         <h1 class="name_page">Расписание</h1>
+        <?php if($status[0]->status != 'completed'): ?>
         <div class="card mb-3">
             <div class="card-body">
                 <?php if($form == 0): ?>
@@ -12,15 +13,20 @@
                     </div>
                 </form>
                 <?php else: ?>
+                    <?php if($status[0]->status != 'processing'): ?>
                     <form action="<?php echo e(route('del_application')); ?>" method="post">
                         <?php echo csrf_field(); ?>
                         <div class="input-group">
                             <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить заявку</button>
                         </div>
                     </form>
+                    <?php else: ?>
+                        <p class="name_page" style="margin-bottom: 0px;">Ваша заявка обрабатывается</p>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
+        <?php endif; ?>
 
         <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>
             <div class=" block_news" style="width: 100%;">

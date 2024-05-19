@@ -11,7 +11,10 @@ class ModerController extends Controller
     //просмотр заявок
     public function application(){
         if(Auth()->User() && Auth()->User()->role_id > 1){
-            return view('application');
+            $expectation = DB::table('application')->join('users', 'application.user_id', '=', 'users.id')->select(DB::raw('*, application.id as application'))->where('application.status', '=', 'expectation')->orderBy('application.date', 'DESC')->get();
+            $processing = DB::table('application')->join('users', 'application.user_id', '=', 'users.id')->select(DB::raw('*, application.id as application'))->where('application.status', '=', 'processing')->orderBy('application.date', 'DESC')->get();
+            $completed = DB::table('application')->join('users', 'application.user_id', '=', 'users.id')->select(DB::raw('*, application.id as application'))->where('application.status', '=', 'completed')->orderBy('application.date', 'DESC')->get();
+            return view('application', ['expectation' => $expectation, 'processing' => $processing, 'completed' => $completed]);
         }
         return redirect(url('/'));
     }

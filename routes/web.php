@@ -72,6 +72,12 @@ Route::post('/add_schedule', [App\Http\Controllers\ModerController::class, 'add_
 //удаления позиции рассписания
 Route::post('/del_schedule', [App\Http\Controllers\ModerController::class, 'del_schedule'])->name('del_schedule');
 
+//заявки
+//обработка заявки
+Route::post('/processing_application', [App\Http\Controllers\ApplicationController::class, 'processing_application'])->name('processing_application');
+//завершение заявки
+Route::post('/completed_application', [App\Http\Controllers\ApplicationController::class, 'completed_application'])->name('completed_application');
+
 //авторизация
 Auth::routes();
 

@@ -4,6 +4,7 @@
 
     <div class="schedule">
         <h1 class="name_page">Расписание</h1>
+        @if($status[0]->status != 'completed')
         <div class="card mb-3">
             <div class="card-body">
                 @if($form == 0)
@@ -14,15 +15,20 @@
                     </div>
                 </form>
                 @else
+                    @if($status[0]->status != 'processing')
                     <form action="{{route('del_application')}}" method="post">
                         @csrf
                         <div class="input-group">
                             <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить заявку</button>
                         </div>
                     </form>
+                    @else
+                        <p class="name_page" style="margin-bottom: 0px;">Ваша заявка обрабатывается</p>
+                    @endif
                 @endif
             </div>
         </div>
+        @endif
 
         @if(Auth()->User() && Auth()->User()->role_id > 1)
             <div class=" block_news" style="width: 100%;">

@@ -22,7 +22,8 @@ class ScheduleController extends Controller
         }
         $weekday = DB::table('weekday')->get();
         $form = DB::table('application')->where('application.user_id', '=', $id)->count('application.id');
-        return view('schedule',['schedule' => $coach, 'form' => $form, 'weekday' => $weekday]);
+        $status = DB::table('application')->where('application.user_id', '=', $id)->get();
+        return view('schedule',['schedule' => $coach, 'form' => $form, 'weekday' => $weekday, 'status' => $status]);
     }
 
     //функция возращающая позиции в расписании
