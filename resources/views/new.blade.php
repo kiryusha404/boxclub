@@ -51,7 +51,7 @@
                                     </div>
                                 </form>
                             </div>
-                            @elseif(Auth()->User()->role_id > 1)
+                            @elseif(Auth()->User() && Auth()->User()->role_id > 1)
                                 <div class=" position-absolute top-0 end-0">
                                     <form action="{{ route('del_comment_moder') }}" method="post">
                                         @csrf

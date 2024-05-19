@@ -18,7 +18,7 @@
                                     <label for="moder" class="col-md-4 col-form-label text-md-end">{{ __('Пользователь') }}</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-select" aria-label="Disabled select example" name="moder">
+                                        <select class="form-select" aria-label="Disabled select example" name="moder" required>
                                             <option selected disabled>Выберите</option>
                                             @foreach($users as $user)
                                             <option value="{{$user->id}}">{{$user->surname}} {{$user->name}} {{$user->patronymic}} - {{$user->email}}</option>
@@ -56,7 +56,7 @@
                                     <label for="moder" class="col-md-4 col-form-label text-md-end">{{ __('Пользователь') }}</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-select" aria-label="Disabled select example" name="moder">
+                                        <select class="form-select" aria-label="Disabled select example" name="moder" required>
                                             <option selected disabled>Выберите</option>
                                             @foreach($moders as $moder)
                                                 <option value="{{$moder->id}}">{{$moder->surname}} {{$moder->name}} {{$moder->patronymic}} - {{$moder->email}}</option>

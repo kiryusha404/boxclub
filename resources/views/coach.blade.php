@@ -18,7 +18,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Имя тренера</label>
-                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name">
+                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name" required>
                                             <option selected disabled>Выберите</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->surname}} {{$user->name}} {{$user->patronymic}} - {{$user->email}}</option>

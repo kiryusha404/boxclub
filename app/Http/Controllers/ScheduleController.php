@@ -20,13 +20,14 @@ class ScheduleController extends Controller
         else{
             $id = 0;
         }
+        $weekday = DB::table('weekday')->get();
         $form = DB::table('application')->where('application.user_id', '=', $id)->count('application.id');
-        return view('schedule',['schedule' => $coach, 'form' => $form]);
+        return view('schedule',['schedule' => $coach, 'form' => $form, 'weekday' => $weekday]);
     }
 
     //функция возращающая позиции в расписании
     private function schedule_position($id){
-        $position = DB::table('schedule')->join('weekday', 'weekday.id', '=', 'schedule.weekday_id')->where('schedule.user_id', '=', $id)->get();
+        $position = DB::table('schedule')->select(DB::raw('*, schedule.id as schedule_id'))->join('weekday', 'weekday.id', '=', 'schedule.weekday_id')->where('schedule.user_id', '=', $id)->get();
         return $position;
     }
 

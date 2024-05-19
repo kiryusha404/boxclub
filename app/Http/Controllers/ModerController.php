@@ -60,4 +60,20 @@ class ModerController extends Controller
         return redirect()->back();
 
     }
+
+    // добавление позиции расписания
+    public function add_schedule(Request $schedule){
+        if(Auth()->User() && Auth()->User()->role_id > 1) {
+            DB::table('schedule')->insert(['user_id' => Auth()->User()->id, 'schedule_name' => $schedule->name, 'weekday_id' => $schedule->weekday, 'time1' => $schedule->time1, 'time2' => $schedule->time2]);
+        }
+        return redirect()->back();
+    }
+
+    // удалеие позиции расписания
+    public function del_schedule(Request $schedule){
+        if(Auth()->User() && Auth()->User()->role_id > 1) {
+            DB::table('schedule')->where('id', '=', $schedule->id)->delete();
+        }
+        return redirect()->back();
+    }
 }

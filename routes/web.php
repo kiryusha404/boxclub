@@ -50,6 +50,9 @@ Route::post('/del_moder', [App\Http\Controllers\AdminController::class, 'del_mod
 Route::post('/add_coach', [App\Http\Controllers\AdminController::class, 'add_coach'])->name('add_coach');
 //удаление тренера
 Route::post('/del_coach', [App\Http\Controllers\AdminController::class, 'del_coach'])->name('del_coach');
+//удаление тренера
+Route::post('/del_schedule_admin', [App\Http\Controllers\AdminController::class, 'del_schedule_admin'])->name('del_schedule_admin');
+
 
 //возможности модератора
 //обзор заявок
@@ -64,6 +67,10 @@ Route::post('/add_boxer', [App\Http\Controllers\ModerController::class, 'add_box
 Route::post('/del_boxer', [App\Http\Controllers\ModerController::class, 'del_boxer'])->name('del_boxer');
 //удаление комментария
 Route::post('/del_comment_moder', [App\Http\Controllers\ModerController::class, 'del_comment_moder'])->name('del_comment_moder');
+//добавление позиции рассписания
+Route::post('/add_schedule', [App\Http\Controllers\ModerController::class, 'add_schedule'])->name('add_schedule');
+//удаления позиции рассписания
+Route::post('/del_schedule', [App\Http\Controllers\ModerController::class, 'del_schedule'])->name('del_schedule');
 
 //авторизация
 Auth::routes();

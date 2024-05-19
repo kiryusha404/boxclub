@@ -49,7 +49,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <?php elseif(Auth()->User()->role_id > 1): ?>
+                            <?php elseif(Auth()->User() && Auth()->User()->role_id > 1): ?>
                                 <div class=" position-absolute top-0 end-0">
                                     <form action="<?php echo e(route('del_comment_moder')); ?>" method="post">
                                         <?php echo csrf_field(); ?>

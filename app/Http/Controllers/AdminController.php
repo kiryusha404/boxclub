@@ -59,4 +59,12 @@ class AdminController extends Controller
         }
         return redirect(route('coach'));
     }
+
+    //удаление любой позиции расписаия
+    public function del_schedule_admin(Request $schedule){
+        if(Auth()->User() && Auth()->User()->role_id == 3){
+            DB::table('schedule')->where('id', '=', $schedule->id)->delete();
+        }
+        return redirect()->back();
+    }
 }
