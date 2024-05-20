@@ -2,7 +2,20 @@
 
     <div class="schedule">
         <h1 class="name_page">Расписание</h1>
-        <?php if($status[0]->status != 'completed'): ?>
+
+        <?php if(!Auth()->User()): ?>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="<?php echo e(route('add_application')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if(Auth()->User() && isset($status[0]->status) && $status[0]->status != 'completed' ): ?>
         <div class="card mb-3">
             <div class="card-body">
                 <?php if($form == 0): ?>
@@ -26,6 +39,7 @@
                 <?php endif; ?>
             </div>
         </div>
+
         <?php endif; ?>
 
         <?php if(Auth()->User() && Auth()->User()->role_id > 1): ?>

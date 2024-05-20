@@ -4,7 +4,7 @@
     <div class="coach">
         <h1 class="name_page">Тренеры</h1>
 
-        @if(Auth()->User() && Auth()->User()->role_id = 3)
+        @if(Auth()->User() && Auth()->User()->role_id == 3)
             <div class=" block_news" style="width: 100%;">
                 <div class="row justify-content-center">
                     <div class="" >

@@ -17,7 +17,7 @@
                                     <?php echo csrf_field(); ?>
                                     <div class="form-group">
                                         <label for="name">Имя спортмена</label>
-                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name">
+                                        <select class="form-select" aria-label="Disabled select example" name="id" id="name" required>
                                             <option selected disabled>Выберите</option>
                                             <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($user->id); ?>"><?php echo e($user->surname); ?> <?php echo e($user->name); ?> <?php echo e($user->patronymic); ?> - <?php echo e($user->email); ?></option>
