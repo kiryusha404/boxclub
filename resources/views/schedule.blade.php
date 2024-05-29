@@ -5,7 +5,18 @@
     <div class="schedule">
         <h1 class="name_page">Расписание</h1>
 
-
+        @if(!Auth()->User() || !isset($status[0]->status))
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="{{route('add_application')}}" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
         @if(Auth()->User() && isset($status[0]->status) && $status[0]->status != 'completed' )
         <div class="card mb-3">
             <div class="card-body">
@@ -30,20 +41,8 @@
                 @endif
             </div>
         </div>
-            @elseif(!Auth()->User() || !isset($status[0]->status))
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <form action="{{route('add_application')}}" method="post">
-                            @csrf
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            
-        @endif
 
+        @endif
 
         @if(Auth()->User() && Auth()->User()->role_id > 1)
             <div class=" block_news" style="width: 100%;">
