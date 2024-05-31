@@ -6,42 +6,39 @@
         <h1 class="name_page">Расписание</h1>
 
 
-        @if(Auth()->User() && isset($status[0]->status) && $status[0]->status != 'completed' )
-        <div class="card mb-3">
-            <div class="card-body">
-                @if($form == 0)
-                <form action="{{route('add_application')}}" method="post">
-                    @csrf
-                    <div class="input-group">
-                        <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
-                    </div>
-                </form>
-                @else
-                    @if($status[0]->status != 'processing')
+        @if(!Auth()->User() || !isset($status[0]->status))
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="{{route('add_application')}}" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        @elseif(isset($status[0]->status) && $status[0]->status != 'processing' && $status[0]->status != 'completed')
+            <div class="card mb-3">
+                <div class="card-body">
                     <form action="{{route('del_application')}}" method="post">
                         @csrf
                         <div class="input-group">
                             <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Удалить заявку</button>
                         </div>
                     </form>
-                    @else
-                        <p class="name_page" style="margin-bottom: 0px;">Ваша заявка обрабатывается</p>
-                    @endif
-                @endif
-            </div>
-        </div>
-            @elseif(!Auth()->User() || !isset($status[0]->status))
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <form action="{{route('add_application')}}" method="post">
-                            @csrf
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-outline-primary b_feedback" data-mdb-ripple-init>Записаться на первое занятие</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
-            
+            </div>
+                    @elseif(isset($status[0]->status) && $status[0]->status == 'processing')
+            <div class="card mb-3">
+                <div class="card-body">
+                        <p class="name_page" style="margin-bottom: 0px;">Ваша заявка обрабатывается</p>
+
+                </div>
+            </div>
+
+
         @endif
 
 
