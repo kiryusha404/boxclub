@@ -17,8 +17,11 @@ class AdminController extends Controller
 
          $moders = DB::table('users')->where('role_id', '=', '2')->orderBy('surname', 'asc')->orderBy('name', 'asc')->orderBy('patronymic', 'asc')->orderBy('email', 'asc')->get();
 
+         $busers = DB::table('users')->where('role_id', '!=', '0')->where('role_id', '!=', '3')->orderBy('surname', 'asc')->orderBy('name', 'asc')->orderBy('patronymic', 'asc')->orderBy('email', 'asc')->get();
 
-         return view('admin', ['users' => $users, 'moders' => $moders]);
+         $ban_users = DB::table('users')->where('role_id', '=', '0')->orderBy('surname', 'asc')->orderBy('name', 'asc')->orderBy('patronymic', 'asc')->orderBy('email', 'asc')->get();
+
+         return view('admin', ['users' => $users, 'moders' => $moders, 'busers' => $busers, 'ban_users' => $ban_users]);
      }
      return redirect(url('/'));
  }
@@ -37,6 +40,31 @@ class AdminController extends Controller
         if(Auth()->User() && Auth()->User()->role_id == 3) {
 
             DB::table('users')->where('id', '=', $user->moder)->update(['role_id' => 1]);
+        }
+        return redirect(route('admin'));
+    }
+
+    //блокировка пользователя
+    public function ban_user(Request $user){
+        if(Auth()->User() && Auth()->User()->role_id == 3) {
+
+            DB::table('schedule')->where('user_id', '=', $user->user)->delete();
+            DB::table('comments')->where('user_id', '=', $user->user)->delete();
+            DB::table('feedback')->where('user_id', '=', $user->user)->delete();
+            DB::table('boxer')->where('user_id', '=', $user->user)->delete();
+            DB::table('coach')->where('user_id', '=', $user->user)->delete();
+            DB::table('application')->where('user_id', '=', $user->user)->delete();
+
+            DB::table('users')->where('id', '=', $user->user)->update(['role_id' => 0]);
+        }
+        return redirect(route('admin'));
+    }
+
+    //разблокировать пользователя
+    public function unban_user(Request $user){
+        if(Auth()->User() && Auth()->User()->role_id == 3) {
+
+            DB::table('users')->where('id', '=', $user->user)->update(['role_id' => 1]);
         }
         return redirect(route('admin'));
     }

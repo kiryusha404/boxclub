@@ -10,6 +10,9 @@ class FeedbackController extends Controller
 {
     //страница отзывов
     public function feedback(){
+        if(parent::baned()){
+            return redirect()->route('baned');
+        }
         if(Auth()->User()) {
             $id = Auth()->User()->id;
         }
@@ -23,6 +26,9 @@ class FeedbackController extends Controller
 
     // функция удаления отзыва
     public function del_feedback(Request $feedback){
+        if(parent::baned()){
+            return redirect()->route('baned');
+        }
         $id = Auth()->User()->id;
         DB::table('feedback')->where('user_id', '=', $id)->delete();
         return redirect()->back();
@@ -30,6 +36,9 @@ class FeedbackController extends Controller
 
     // функция добавления отзыва
     public function add_feedback(Request $feedback){
+        if(parent::baned()){
+            return redirect()->route('baned');
+        }
         $id = Auth()->User()->id;
         DB::table('feedback')->insert(['user_id' => $id, 'text' => $feedback->feedback]);
         return redirect()->back();

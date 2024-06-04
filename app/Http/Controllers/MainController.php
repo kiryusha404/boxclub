@@ -13,5 +13,11 @@ class MainController extends Controller
     {
         return view('license');
     }
+    public function baned(){
+        if(Auth()->User() && Auth()->User()->role_id == 0){
+            return view('baned');
+        }
+        return redirect(url('/'));
+    }
 
 }

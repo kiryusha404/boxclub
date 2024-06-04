@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 // лицензионное соглашение
 Route::get('/license', [App\Http\Controllers\MainController::class, 'license'])->name('license');
+// блокировка пользователя
+Route::get('/baned', [App\Http\Controllers\MainController::class, 'baned'])->name('baned');
 
 // страница новости
 Route::get('/', [App\Http\Controllers\NewsController::class, 'welcome'])->name('welcome');
@@ -46,6 +48,10 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->na
 Route::post('/add_moder', [App\Http\Controllers\AdminController::class, 'add_moder'])->name('add_moder');
 //удаление модератора
 Route::post('/del_moder', [App\Http\Controllers\AdminController::class, 'del_moder'])->name('del_moder');
+//заблокировать прользователя
+Route::post('/ban_user', [App\Http\Controllers\AdminController::class, 'ban_user'])->name('ban_user');
+//Разблокировать пользователя
+Route::post('/unban_user', [App\Http\Controllers\AdminController::class, 'unban_user'])->name('unban_user');
 //добавление тренера
 Route::post('/add_coach', [App\Http\Controllers\AdminController::class, 'add_coach'])->name('add_coach');
 //удаление тренера
